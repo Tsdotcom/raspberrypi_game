@@ -1,8 +1,9 @@
+from PIL import Image, ImageDraw, ImageFont
 from tkinter import *
 from tkinter import ttk
 import time
 from game_settings import Settings
-
+import display
 class Game:
     def __init__(self):
         self.root = Settings()
@@ -20,9 +21,11 @@ class Game:
         self.game_pause = False
 
 root = Tk()
+
 start = ttk.Frame(root, height=240, width=240, background="white")
 ttk.Button(start, text="START", command=Game.start_game()).grid(column=1, row=0)
 root.mainloop()
+
 
 
     
