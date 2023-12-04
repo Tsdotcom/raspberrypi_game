@@ -8,4 +8,4 @@ class Tiles:
         self.position = (0,0)
     def add_speed(self):
         self.speed += 5
-        Settings().bar_speed = self.speed 
+        Settings().bar_speed = self.speed
