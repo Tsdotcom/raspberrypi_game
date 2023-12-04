@@ -33,6 +33,7 @@ class Start:
         pass
     def gen_random_pic(self):
         return random.randint(1,5)
+    
     def crop_image(self,img):
         pass
 

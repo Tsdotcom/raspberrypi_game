@@ -5,8 +5,8 @@ from itertools import product
 class Image:
     def __init__(self,random_num):
         self.img_displayer = Display()
-        self.open_img = Image.open(self.img_path).resize((self.img_displayer.width,self.img_displayer.height))
-        self.opened_img = ""
+        self.img_height = Display().height
+        self.img_width = Display().width
         self.name = random_num+".jpg"
         self.dir_in = "/home/tsdotcom/esw/mygame/game_images/gameimages"
         self.dir_out = "/home/tsdotcom/esw/mygame/game_images/gameimages/tiles"
@@ -20,7 +20,8 @@ class Image:
             box = (j, i, j+d, i+d)
             out = os.path.join(dir_out, f'{name}_{i}_{j}{ext}')
             img.crop(box).save(out)
-    def show(self):
-        self.img_displayer.disp.image(self.open_img)
+    def show(self,path):
+        img = Image.open(path).resize((self.img_height,self.img_width))
+        self.img_displayer.disp.image(img)
     def rotate90(self):
         return self.open_img.rotate(90)
