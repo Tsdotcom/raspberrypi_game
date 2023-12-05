@@ -9,10 +9,12 @@ class ImageGUI:
         self.img_displayer = Display()
         self.img_height = Display().height
         self.img_width = Display().width
+        self.draw = ImageDraw()
         # self.name = random_num+".jpg".toString
-        self.dir_in = "/home/tsdotcom/esw/mygame/game_images/gameimages"
-        self.dir_out = "/home/tsdotcom/esw/mygame/game_images/gameimages/tiles"
+        self.dir_in = "/home/tsdotcom/esw/mygame/game_images/game_images"
+        self.dir_out = "/home/tsdotcom/esw/mygame/game_images/tiles"
         self.tile_size = 60
+        self.tile_pos = [[]]
     def crop(self,filename, dir_in, dir_out, d):
         name, ext = os.path.splitext(filename)
         img = Image.open(os.path.join(dir_in, filename)).resize((240,240))
@@ -46,3 +48,13 @@ class ImageGUI:
                 new_im.paste(im, (x_offset,y_offset))
                 x_offset += im.size[0]
         new_im.save('test.jpg')
+    def save_image_pos(self):
+        pass
+    def delete_images(self):
+        for file in os.listdir(self.dir_out):
+            if file.endswith('.jpg'):
+                os.remove(file)
+    def highlight_image(self):
+        pass
+if __name__ == "__init__":
+    pass
