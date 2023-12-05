@@ -5,14 +5,17 @@ from os.path import isfile, join
 import numpy
 from image import ImageGUI
 import sys
+from controller import Controller
 def main():
     st = starting_activity.Start()
     # ds = display.Display()
     ds = ImageGUI(3)
+    ct = Controller()
     if st.root.start_game == False:
         st.start_game()
         num = st.gen_random_pic()
-        
+        while True:
+            ct.onClick()
     if st.root.end_game == True:
         pass
 
