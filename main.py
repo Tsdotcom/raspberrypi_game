@@ -1,22 +1,22 @@
-from PIL import Image, ImageDraw, ImageFont
-import display
+from PIL import Image, ImageDraw, ImageFont, ImageSequence
 import starting_activity
-import os
-from itertools import product
-
+from os import listdir 
+from os.path import isfile, join
+import numpy
+from image import ImageGUI
+import sys
 def main():
     st = starting_activity.Start()
-    ds = display.Display()
+    # ds = display.Display()
+    ds = ImageGUI(3)
     if st.root.start_game == False:
         st.start_game()
         num = st.gen_random_pic()
-        img1 = Image.open('game_images/gameimages/3.jpg').resize((120,120))
-        display.Display().disp.image(img1)
-        # img2= Image.open('game_images/gameimages/2.jpg').resize((120,120))
-        # display.Display().disp.image(img2)
+        
     if st.root.end_game == True:
         pass
 
 if __name__ == '__main__':
+
 
     main()
