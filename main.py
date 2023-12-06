@@ -16,7 +16,7 @@ def main():
         num = st.gen_random_pic()
         # while True: 
         #     ct.onClick()
-        # ds.crop('3.jpg',ds.dir_in, ds.dir_out,60)
+        ds.crop('3.jpg',ds.dir_in, ds.dir_out,60)
         ds.multiple_images()
     if st.root.end_game == True:
         pass
