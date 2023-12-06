@@ -14,9 +14,10 @@ def main():
     if st.root.start_game == False:
         st.start_game()
         num = st.gen_random_pic()
-        # while True:
+        # while True: 
         #     ct.onClick()
-        ds.rename_img("/home/tsdotcom/esw/mygame/tiles/1_0_120.jpg","/home/tsdotcom/esw/mygame/tiles/1_120_120.jpg")
+        # ds.crop('3.jpg',ds.dir_in, ds.dir_out,60)
+        ds.multiple_images()
     if st.root.end_game == True:
         pass
 
