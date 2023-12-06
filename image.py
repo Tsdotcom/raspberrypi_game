@@ -1,4 +1,4 @@
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFont, ImageOps, ImageEnhance
 from display import Display 
 import os
 from itertools import product
@@ -9,12 +9,11 @@ class ImageGUI:
         self.img_displayer = Display()
         self.img_height = Display().height
         self.img_width = Display().width
-        self.draw = ImageDraw()
-        # self.name = random_num+".jpg".toString
-        self.dir_in = "/home/tsdotcom/esw/mygame/game_images/game_images"
-        self.dir_out = "/home/tsdotcom/esw/mygame/game_images/tiles"
+        # self.draw = ImageDraw()
+        self.name = '1.jpg'
+        self.dir_in = "/home/tsdotcom/esw/mygame/game_images"
+        self.dir_out = "/home/tsdotcom/esw/mygame/tiles"
         self.tile_size = 60
-        self.tile_pos = [[]]
     def crop(self,filename, dir_in, dir_out, d):
         name, ext = os.path.splitext(filename)
         img = Image.open(os.path.join(dir_in, filename)).resize((240,240))
@@ -31,9 +30,9 @@ class ImageGUI:
         return self.open_img.rotate(90)
     def multiple_images(self):
         listofimages = []
-        onlyfiles = [ f for f in listdir(self.dir_in) if isfile(join(self.dir_in,f)) ]
+        onlyfiles = [ f for f in listdir(self.dir_out) if isfile(join(self.dir_out,f)) ]
         for i in range(0,len(onlyfiles)):
-            listofimages.append(f"{self.dir_in}/{onlyfiles[i]}")
+            listofimages.append(f"{self.dir_out}/{onlyfiles[i]}")
         images = [Image.open(x).resize((60,60)) for x in listofimages]
         new_im = Image.new('RGB', (240, 240))
         x_offset = 0
@@ -54,7 +53,17 @@ class ImageGUI:
         for file in os.listdir(self.dir_out):
             if file.endswith('.jpg'):
                 os.remove(file)
-    def highlight_image(self):
-        pass
-if __name__ == "__init__":
-    pass
+    def border_image(self, path):
+        img = Image.open(path).resize((80,80))
+        img_with_border = ImageOps.expand(img, border=1, fill='white')
+        img_with_border.save(f'{path}test.png')
+    def highlight_image(self,path):
+        img = Image.open(path).resize((80,80))
+        enhaced = ImageEnhance.Brightness(img)
+        img = enhaced.enhance(0.5)
+        img.save(f'{path}test.png')
+    def rename_img(self,source,dest):
+        temp = "/home/tsdotcom/esw/mygame/tiles/1_x_y.jpg" # middle 
+        os.rename(dest,temp)
+        os.rename(source,dest)
+        os.rename(temp,source)

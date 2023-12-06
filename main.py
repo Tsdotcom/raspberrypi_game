@@ -14,8 +14,9 @@ def main():
     if st.root.start_game == False:
         st.start_game()
         num = st.gen_random_pic()
-        while True:
-            ct.onClick()
+        # while True:
+        #     ct.onClick()
+        ds.rename_img("/home/tsdotcom/esw/mygame/tiles/1_0_120.jpg","/home/tsdotcom/esw/mygame/tiles/1_120_120.jpg")
     if st.root.end_game == True:
         pass
 
