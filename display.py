@@ -1,5 +1,7 @@
 from digitalio import DigitalInOut, Direction
 from adafruit_rgb_display import st7789
+from gpiozero import Button
+from signal import pause
 import board
 class Display:
     def __init__(self):

@@ -16,6 +16,9 @@ class ImageGUI:
         self.selected_pic =  f"{self.dir_in}/{random.randint(1,5)}.jpg"
         self.pic_shuffled_list = []
         self.new_img = 'shuffled.jpg'
+        self.bordered_image = '/home/tsdotcom/esw/mygame/bordered_image/'
+        self.de_bordered_image = '/home/tsdotcom/esw/mygame/bordered_image'
+        self.highlighted_image = '/home/tsdotcom/esw/mygame/high_images'
     def crop(self):
         img = Image.open(self.selected_pic).resize((240,240))
         w, h = img.size
@@ -57,18 +60,21 @@ class ImageGUI:
     def border_image(self,num):
         img = Image.open(f'{self.dir_out}/{num}.jpg').resize((60,60))
         img_with_border = ImageOps.expand(img, border=1, fill='black')
-        img_with_border.save(f'{num}.jpg')
-        temp = "x.jpg" # middle 
-        os.rename(f'{self.dir_out}/{num}.jpg',temp)
-        os.rename(f'{num}.jpg',f'{self.dir_out}/{num}.jpg')
-        os.rename(temp,f'{num}.jpg')
-    def highlight_image(self,path):
-        img = Image.open(path).resize((60,60))
+        img_with_border.save(f'{self.bordered_image}{num}.jpg')
+    def highlight_image(self,num):
+        img = Image.open(f"{self.dir_out}/{num}.jpg").resize((60,60))
         enhaced = ImageEnhance.Brightness(img)
         img = enhaced.enhance(0.5)
-        img.save(f'{path}test.png')
+        img.save(f"{self.highlighted_image}/{num}.jpg")
     def rename_img(self,source,dest):
-        temp = "/home/tsdotcom/esw/mygame/tiles/x.jpg" # middle 
+        temp = "x.jpg" # middle 
         os.rename(dest,temp)
         os.rename(source,dest)
         os.rename(temp,source)
+    def delete_border(self):
+        for file in os.listdir(self.de_bordered_image):
+            if file.endswith('.jpg'):
+                try:
+                    os.remove(file)
+                except:
+                    FileExistsError
