@@ -5,16 +5,15 @@ from itertools import product
 from os import listdir 
 from os.path import isfile, join
 from natsort import natsorted 
-from controller import Controller
 import random
+from pathlib import Path
 class ImageGUI:
     def __init__(self):
         self.img_displayer = Display()
-        self.control = Controller()
         self.dir_in = "/home/tsdotcom/esw/mygame/game_images"
         self.dir_out = "/home/tsdotcom/esw/mygame/tiles"
         self.tile_size = 60
-        self.selected_pic =  f"{self.dir_in}/{self.control.get_random_num()}.jpg"
+        self.selected_pic =  f"{self.dir_in}/{random.randint(1,5)}.jpg"
         self.pic_shuffled_list = []
         self.new_img = 'shuffled.jpg'
     def crop(self):
@@ -47,8 +46,7 @@ class ImageGUI:
             for k in range(0,240,60):
                 new_img.paste(images[num],(k,i))         
                 num += 1
-         
-        new_img.save('shuffled.jpg')  
+        new_img.save(self.new_img) 
     def delete_images(self):
         for file in os.listdir(self.dir_out):
             if file.endswith('.jpg'):
@@ -56,10 +54,14 @@ class ImageGUI:
                     os.remove(file)
                 except:
                     FileExistsError
-    def border_image(self, path):
-        img = Image.open(path).resize((59,59))
-        img_with_border = ImageOps.expand(img, border=1, fill='white')
-        img_with_border.save(path)
+    def border_image(self,num):
+        img = Image.open(f'{self.dir_out}/{num}.jpg').resize((60,60))
+        img_with_border = ImageOps.expand(img, border=1, fill='black')
+        img_with_border.save(f'{num}.jpg')
+        temp = "x.jpg" # middle 
+        os.rename(f'{self.dir_out}/{num}.jpg',temp)
+        os.rename(f'{num}.jpg',f'{self.dir_out}/{num}.jpg')
+        os.rename(temp,f'{num}.jpg')
     def highlight_image(self,path):
         img = Image.open(path).resize((60,60))
         enhaced = ImageEnhance.Brightness(img)

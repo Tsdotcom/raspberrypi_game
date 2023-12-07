@@ -20,27 +20,40 @@ class Controller:
         self.startgame = False
         self.random_num = 0
     def onClick(self, condition):
-        while condition:
+        while not condition:
             if not self.up.value:
-                self.y -= 60
+                self.y -= 4
+                self.img_gui.border_image(self.x + self.y)
+                self.img_gui.multiple_images()
+                self.img_gui.show(self.img_gui.new_img)
             if not self.down.value:
-                self.y += 60
+                self.y += 4
+                self.img_gui.border_image(self.x + self.y)
+                self.img_gui.multiple_images()
+                self.img_gui.show(self.img_gui.new_img)
             if not self.choosebut.value:
                 self.choose = True
             if not self.rotatebut.value:
                 self.rotate = True
             if not self.right.value:
-                self.x += 60
+                self.x += 1
+                self.img_gui.border_image(self.x + self.y)
+                self.img_gui.multiple_images()
+                self.img_gui.show(self.img_gui.new_img)
             if not self.left.value:
-                self.x -= 60
+                self.x -= 1
+                self.img_gui.border_image(self.x + self.y)
+                self.img_gui.multiple_images()
+                self.img_gui.show(self.img_gui.new_img)
             if not self.endbut.value:
                 self.endgame = True
+           
     def clear_pos(self):
         if self.x == 240:
             self.x = 0
         if self.y >= 240:
             self.y = 0
-    def get_random_num (self):
-        self.random_num = random.randint(1,5)
-        return self.random_num
-    
+
+if __name__ == '__main__':
+    start = Controller()
+    start.onClick(False)

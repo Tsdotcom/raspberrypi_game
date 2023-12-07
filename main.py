@@ -14,12 +14,9 @@ def main():
         gui.delete_images()
         gui.crop()
         gui.multiple_images()
-        gui.show(gui.new_img)
         bt_control.onClick(bt_control.endgame)
-
-
+main()
 
             
 
-if __name__ == '__main__':
-    main()
+
